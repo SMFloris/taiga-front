@@ -1,0 +1,10 @@
+# Override the upstream .dockerignore, which only includes prebuilt image config.
+.git
+node_modules
+dist
+coverage
+.cache
+.env
+.env.*
+tmp
+*.log

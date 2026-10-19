@@ -1,5 +1,17 @@
 ## Taiga Front
 
+## Frisbo fork
+
+Our development branch is `frisbo`. Every push publishes a source-built Linux AMD64 image:
+
+```sh
+docker pull ghcr.io/smfloris/taiga-front:frisbo-latest
+```
+
+The **Publish frisbo image** workflow also tags each image `frisbo-<full commit SHA>` and records its digest in the run summary. It can be run manually on `frisbo`. Registry publishing uses `GITHUB_TOKEN`; private packages require authentication to pull. Development and local Compose instructions live in the [Frisbo monorepo](https://github.com/SMFloris/taiga).
+
+Build this fork with `docker build -f docker/Dockerfile.frisbo .`. This Dockerfile compiles the checkout; the upstream `docker/Dockerfile` downloads a prebuilt upstream release.
+
 [![Managed with Taiga.io](https://img.shields.io/badge/managed%20with-TAIGA.io-709f14.svg)](https://tree.taiga.io/project/taiga/ "Managed with Taiga.io")
 [![Build Status](https://img.shields.io/travis/taigaio/taiga-front.svg)](https://travis-ci.org/taigaio/taiga-front "Build Status")
 
