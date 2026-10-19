@@ -33,6 +33,22 @@ div.wrapper.roles(
                 )
 
             fieldset
+                label(for="commit-prefix", translate="ADMIN.GITHUB.COMMIT_PREFIX")
+                input(
+                    id="commit-prefix"
+                    type="text"
+                    name="commit-prefix"
+                    ng-model="github.commit_prefix"
+                    placeholder="TG"
+                    maxlength="32"
+                    data-maxlength="32"
+                    data-required="true"
+                )
+                p.help-text
+                    span(translate="ADMIN.GITHUB.COMMIT_PREFIX_HELP")
+                    strong {{github.commit_prefix || 'TG'}}-123
+
+            fieldset
                 .select-input-text(tg-select-input-text)
                     div
                         label(for="payload-url", translate="ADMIN.THIRD_PARTIES.PAYLOAD_URL")
@@ -48,7 +64,7 @@ div.wrapper.roles(
                             .option-wrapper.select-input-content(title="{{'COMMON.COPY_TO_CLIPBOARD' | translate}}")
                                 tg-svg(svg-icon="icon-clipboard")
 
-            button.btn-small(
+            button.btn-small.submit-button(
                 variant="primary"
                 type="submit"
                 title="{{'COMMON.SAVE' | translate}}"
