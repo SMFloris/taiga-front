@@ -522,6 +522,12 @@
             "ERROR_BUSY": "Sorry, the Taiga is experiencing heavy load right now. Please try again in a few minutes."
         },
         "MODULES": {
+            "CUSTOM_LINKS": "Custom links",
+            "CUSTOM_LINKS_DESCRIPTION": "Add up to 20 named HTTP or HTTPS links above Issues in the project sidebar.",
+            "CUSTOM_LINK_NAME": "Name",
+            "CUSTOM_LINK_URL": "URL",
+            "CUSTOM_LINK_NEW_TAB": "Open in a new tab",
+            "CUSTOM_LINK_ADD": "Add link",
             "TITLE": "Modules",
             "EPICS": "Epics",
             "EPICS_DESCRIPTION": "Visualize and manage the most strategic part of your project",

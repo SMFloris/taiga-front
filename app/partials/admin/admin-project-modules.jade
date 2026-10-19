@@ -106,6 +106,66 @@ div.wrapper(
                         span.check-text.check-yes(translate="COMMON.YES")
                         span.check-text.check-no(translate="COMMON.NO")
 
+            .module.module-custom-links(ng-class="{active: project.is_custom_links_activated}")
+                .module-icon
+                    span.custom-links-icon(aria-hidden="true") ↗
+                .module-name(translate="ADMIN.MODULES.CUSTOM_LINKS")
+                .module-desc
+                    p(translate="ADMIN.MODULES.CUSTOM_LINKS_DESCRIPTION")
+                    .custom-links-fields(ng-if="project.is_custom_links_activated")
+                        .custom-link-fields(ng-repeat="link in customLinks track by $index")
+                            label
+                                span(translate="ADMIN.MODULES.CUSTOM_LINK_NAME")
+                                input(
+                                    type="text"
+                                    name="custom-link-name-{{$index}}"
+                                    ng-model="link.name"
+                                    data-required="true"
+                                    data-maxlength="100"
+                                    maxlength="100"
+                                )
+                            label
+                                span(translate="ADMIN.MODULES.CUSTOM_LINK_URL")
+                                input(
+                                    type="text"
+                                    name="custom-link-url-{{$index}}"
+                                    ng-model="link.url"
+                                    placeholder="https://google.com"
+                                    data-required="true"
+                                    data-url="true"
+                                    data-maxlength="2048"
+                                )
+                            label.custom-link-new-tab
+                                input(type="checkbox", ng-model="link.open_in_new_tab")
+                                span(translate="ADMIN.MODULES.CUSTOM_LINK_NEW_TAB")
+                            button.btn-small.custom-link-remove(
+                                type="button"
+                                ng-click="removeCustomLink($index)"
+                                translate="COMMON.DELETE"
+                            )
+                        .custom-links-actions
+                            button.btn-small.custom-link-add(
+                                type="button"
+                                ng-click="addCustomLink()"
+                                ng-disabled="customLinks.length >= 20"
+                                translate="ADMIN.MODULES.CUSTOM_LINK_ADD"
+                            )
+                            button.btn-small.save(
+                                type="button"
+                                translate="COMMON.SAVE"
+                            )
+                .module-activation.module-direct-active
+                    div.check
+                        input.activate-input(
+                            id="functionality-custom-links"
+                            name="functionality-custom-links"
+                            type="checkbox"
+                            ng-model="project.is_custom_links_activated"
+                        )
+                        div
+                        span.check-text.check-yes(translate="COMMON.YES")
+                        span.check-text.check-no(translate="COMMON.NO")
+
             .module.module-issues(ng-class="{true:'active', false:''}[project.is_issues_activated]")
                 .module-icon
                     tg-svg(svg-icon="icon-module-issues")

@@ -76,3 +76,15 @@ describe "EpicTable", ->
         epicTableCtrl = controller "EpicsTableCtrl"
 
         expect(epicTableCtrl.options).to.be.eql({col1: true})
+
+    it "hides closed epics and stories by default", () ->
+        mocks.tgStorage.get = (key, defaults) -> defaults
+        epicTableCtrl = controller "EpicsTableCtrl"
+        expect(epicTableCtrl.options.closed).to.be.false
+        expect(epicTableCtrl.options.closed_us).to.be.false
+
+    it "respects saved closed-item view options", () ->
+        mocks.tgStorage.get.returns({closed: true, closed_us: true})
+        epicTableCtrl = controller "EpicsTableCtrl"
+        expect(epicTableCtrl.options.closed).to.be.true
+        expect(epicTableCtrl.options.closed_us).to.be.true

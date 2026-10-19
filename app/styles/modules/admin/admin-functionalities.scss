@@ -77,4 +77,32 @@
             align-self: flex-start;
         }
     }
+
+    .custom-links-icon {
+        font-size: 3rem;
+        line-height: 1;
+    }
+
+    .custom-link-fields {
+        border-bottom: 1px solid $grey-05;
+        margin: 1rem 0;
+        padding-bottom: 1rem;
+
+        label {
+            display: block;
+            margin-bottom: .5rem;
+        }
+
+        .custom-link-new-tab {
+            align-items: center;
+            display: flex;
+            gap: .5rem;
+        }
+    }
+
+    .custom-links-actions {
+        display: flex;
+        gap: .5rem;
+        margin-top: 1rem;
+    }
 }

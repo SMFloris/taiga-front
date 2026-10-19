@@ -1,0 +1,32 @@
+/* Sidebar extension inside the precompiled navigation's shadow root. */
+.custom-project-link a {
+    align-items: center;
+    color: #d8dee9;
+    display: flex;
+    font-size: 14px;
+    gap: 16px;
+    min-height: 44px;
+    padding: 8px 20px;
+    text-decoration: none;
+}
+
+.custom-project-link a:hover,
+.custom-project-link a:focus {
+    background-color: #434c5e;
+}
+
+.custom-project-link-icon {
+    flex: 0 0 24px;
+    font-size: 24px;
+    text-align: center;
+}
+
+.custom-project-link-label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.collapsed .custom-project-link-label {
+    display: none;
+}

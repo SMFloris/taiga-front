@@ -238,6 +238,9 @@ ProjectModulesDirective = ($rootScope, $repo, $confirm, $loading) ->
             form.reset() # Need to reset the form constrains
             return if not form.validate()
 
+            if $scope.project.is_custom_links_activated
+                $scope.project.custom_links = angular.copy($scope.customLinks or [])
+
             promise = $repo.save($scope.project)
             promise.then ->
                 $scope.$emit("project:loaded", $scope.project)
@@ -265,6 +268,21 @@ ProjectModulesDirective = ($rootScope, $repo, $confirm, $loading) ->
 
         $el.on "keydown", ".videoconference-attributes input", (e) ->
             return e.which != 32
+
+        $scope.$watch "project.id", (id) ->
+            if id?
+                $scope.customLinks = angular.copy($scope.project.custom_links or [])
+
+        $scope.addCustomLink = ->
+            $scope.customLinks ?= []
+            if $scope.customLinks.length < 20
+                $scope.customLinks.push({name: "", url: "", open_in_new_tab: false})
+
+        $scope.removeCustomLink = (index) ->
+            $scope.customLinks.splice(index, 1)
+
+        $scope.$on "$destroy", ->
+            $el.off()
 
         $scope.$watch "project.videoconferences", (newVal, oldVal) ->
             # Reset videoconferences_extra_data if videoconference system change
