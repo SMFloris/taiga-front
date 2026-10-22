@@ -90,16 +90,6 @@ section.issues-table.basic-table(ng-class="{empty: !ctrl.issues.length}")
                     class="arrow-down"
                     d="M11.6232 9.42892C12.5713 9.42892 12.9872 10.6252 12.2435 11.2133L8.62027 14.0784C8.25672 14.3659 7.74328 14.3659 7.37973 14.0784L3.75652 11.2133C3.01283 10.6252 3.42868 9.42892 4.37679 9.42892H11.6232Z")
 
-        div.votes-field(data-fieldname="total_voters" ng-if="!ctrl.sprintIssues")
-            span {{"COMMON.FIELDS.VOTES" | translate}}
-            svg(viewBox="0 0 16 16")
-                path(
-                    class="arrow-up"
-                    d="M11.6232 6.57199C12.5713 6.57199 12.9872 5.37569 12.2435 4.7876L8.62027 1.92248C8.25672 1.635 7.74328 1.635 7.37973 1.92248L3.75652 4.7876C3.01283 5.37569 3.42868 6.57199 4.37679 6.57199L11.6232 6.57199Z")
-                path(
-                    class="arrow-down"
-                    d="M11.6232 9.42892C12.5713 9.42892 12.9872 10.6252 12.2435 11.2133L8.62027 14.0784C8.25672 14.3659 7.74328 14.3659 7.37973 14.0784L3.75652 11.2133C3.01283 10.6252 3.42868 9.42892 4.37679 9.42892H11.6232Z")
-
         div.subject(data-fieldname="ref")
             span {{"ISSUES.TABLE.COLUMNS.ISSUE" | translate}}
             svg(viewBox="0 0 16 16")
@@ -155,9 +145,6 @@ section.issues-table.basic-table(ng-class="{empty: !ctrl.issues.length}")
         div.level-field(tg-listitem-type="issue" ng-if="!ctrl.sprintIssues")
         div.level-field(tg-listitem-severity="issue" ng-if="!ctrl.sprintIssues")
         div.level-field(tg-listitem-priority="issue" ng-if="!ctrl.sprintIssues")
-        div.votes-field(ng-if="!ctrl.sprintIssues")
-            tg-svg(svg-icon="icon-upvote")
-            span {{ issue.total_voters || 0 }}
         div.subject
             a(
                 href=""
@@ -186,16 +173,25 @@ section.issues-table.basic-table(ng-class="{empty: !ctrl.issues.length}")
                     ng-class="{'last':$last}"
                 ) {{tag[0]}}
 
-        div.issue-field(tg-issue-status-inline-edition="issue")
-            a.issue-status(
-                href=""
-                title="{{'ISSUES.TABLE.TITLE_ACTION_CHANGE_STATUS' | translate}}"
-            )
-                span.issue-status-bind
-                tg-svg(
-                    tg-check-permission="modify_issue"
-                    svg-icon="icon-arrow-down"
+        div.issue-field
+            div.issue-status-editor(tg-issue-status-inline-edition="issue")
+                a.issue-status(
+                    href=""
+                    title="{{'ISSUES.TABLE.TITLE_ACTION_CHANGE_STATUS' | translate}}"
                 )
+                    span.issue-status-bind
+                    tg-svg(
+                        tg-check-permission="modify_issue"
+                        svg-icon="icon-arrow-down"
+                    )
+            .promoted-story-statuses(ng-if="issue.promoted_user_stories.length")
+                a.promoted-story-status(
+                    ng-repeat="story in issue.promoted_user_stories track by story.id"
+                    ng-if="story.status_extra_info"
+                    ng-href="project/{{story.project_slug}}/us/{{story.ref}}"
+                    ng-style="{color: story.status_extra_info.color}"
+                    title="#{{story.ref}} {{story.subject}} — {{story.status_extra_info.name}}"
+                ) \#{{story.ref}}
 
         div.attachments-field(ng-if="ctrl.sprintIssues" title="{{ 'ISSUES.TABLE.COLUMNS.ATTACHMENTS' | translate }}")
             span {{ issue.attachments.length }}

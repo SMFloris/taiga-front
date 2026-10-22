@@ -42,9 +42,6 @@
         .issue-field {
             justify-content: flex-end;
         }
-        .votes-field {
-            justify-content: center;
-        }
         .subject {
             justify-content: flex-start;
         }
@@ -90,18 +87,6 @@
                 @include svg-size(.75rem);
                 fill: currentColor;
                 margin-left: .25rem;
-            }
-        }
-        .votes-field {
-            align-items: center;
-            color: $color-link-tertiary;
-            display: flex;
-            justify-content: center;
-
-            .icon {
-                @include svg-size(.875rem);
-                fill: currentColor;
-                margin-right: .25rem;
             }
         }
         .issue-status {
@@ -243,20 +228,11 @@
     .assigned-field,
     .attachments-field,
     .options-field,
-    .issue-field,
-    .votes-field {
+    .issue-field {
         flex-grow: 0;
         flex-shrink: 0;
         margin: 0 .5rem;
         position: relative;
-    }
-    .votes-field {
-        flex-basis: 80px;
-        text-align: center;
-
-        @include until($widescreen) {
-            flex-basis: 3.5rem;
-        }
     }
     .issue-field {
         display: block;
@@ -269,6 +245,25 @@
             flex-basis: 6rem;
             max-width: 6rem;
         }
+    }
+    .promoted-story-statuses {
+        align-items: flex-end;
+        display: flex;
+        flex-direction: column;
+        gap: .25rem;
+        margin-top: .25rem;
+    }
+    .promoted-story-status {
+        @include font-size(xsmall);
+        border: 1px solid currentColor;
+        border-radius: 3px;
+        display: inline-block;
+        line-height: 1.25;
+        max-width: 100%;
+        overflow: hidden;
+        padding: .125rem .375rem;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
     .modified-field {
         flex-basis: 100px;
